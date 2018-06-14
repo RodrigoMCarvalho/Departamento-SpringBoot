@@ -6,7 +6,7 @@ import com.curso.boot.demomvc.model.Funcionario;
 
 public interface FuncionarioDAO {
 	
-	public void save( Funcionario funcionario);
+	public void save(Funcionario funcionario);
 	public void update(Funcionario funcionario);
 	public void delete(Long id);
 	public Funcionario findById(Long id) ;
