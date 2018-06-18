@@ -15,28 +15,33 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 	@Autowired
 	private DepartamentoDAO dao;
 	
-	@Override @Transactional(readOnly=false)
+	@Override 
+	@Transactional(readOnly=false)
 	public void salvar(Departamento departamento) {
 		dao.save(departamento);
 	}
 
-	@Override @Transactional(readOnly=false)
+	@Override 
+	@Transactional(readOnly=false)
 	public void editar(Departamento departamento) {
 		dao.update(departamento);
 	}
 
-	@Override @Transactional(readOnly=false)
+	@Override 
+	@Transactional(readOnly=false)
 	public void excluir(Long id) {
 		dao.delete(id);
 	}
 
-	@Override @Transactional(readOnly=true)
+	@Override 
+	@Transactional(readOnly=true)
 	public Departamento buscarPorId(Long id) {
 		
 		return dao.findById(id);
 	}
 
-	@Override @Transactional(readOnly=true)
+	@Override 
+	@Transactional(readOnly=true)
 	public List<Departamento> burcarTodos() {
 		
 		return dao.findAll();

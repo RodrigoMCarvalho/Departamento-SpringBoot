@@ -20,6 +20,8 @@
 	                </a>
 	            </div>
 	        </nav>
+	        
+	        <div th:replace="fragments/alert"></div>
 	
 	        <div class="container" id="cadastro">
 	            <form th:action="${departamento.id == null} ? @{/departamentos/salvar} : @{/departamentos/editar}" 

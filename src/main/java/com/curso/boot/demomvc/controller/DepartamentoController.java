@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.curso.boot.demomvc.model.Departamento;
 import com.curso.boot.demomvc.service.DepartamentoService;
@@ -35,28 +36,33 @@ public class DepartamentoController {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(Departamento departamento) {
+	public String salvar(Departamento departamento, RedirectAttributes attr) {
 		service.salvar(departamento);
+		attr.addFlashAttribute("success", "Departamento salvo com sucesso.");
 		return "redirect:/departamentos/cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String editar(@PathVariable ("id") Long id, Model model) {
+	public String popularEditar(@PathVariable ("id") Long id, Model model) {
 		Departamento departamento = service.buscarPorId(id);
 		model.addAttribute("departamento",departamento);
 		return "/departamento/cadastro";
 	}
 	
-	@PostMapping("/editar")
-	public String editar(Departamento departamento) {
+	@PostMapping("/editar") //é usado RedirectAttributes e não Model, devido ao returno "redirect"
+	public String editar(Departamento departamento, RedirectAttributes attr) { 
 		service.editar(departamento);
+		attr.addFlashAttribute("success", "Departamento editado com sucesso");
 		return "redirect:/departamentos/cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id) {
-		if(!service.departamentoTemCargos(id)) {  //se o departamento não conter cargos
-			service.excluir(id);
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+		if(service.departamentoTemCargos(id)) {  
+			attr.addFlashAttribute("fail", "Departamento não removido, pois exitem cargo(s) vinculados.");
+		} else {    				
+			service.excluir(id);  //se o departamento não conter cargos será excluído
+			attr.addFlashAttribute("success", "Departamento excluído com sucesso.");
 		}
 		return "redirect:/departamentos/listar";
 	}
