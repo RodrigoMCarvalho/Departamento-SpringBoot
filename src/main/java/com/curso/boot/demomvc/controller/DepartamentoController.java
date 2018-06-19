@@ -38,7 +38,7 @@ public class DepartamentoController {
 	@PostMapping("/salvar")
 	public String salvar(Departamento departamento, RedirectAttributes attr) {
 		service.salvar(departamento);
-		attr.addFlashAttribute("success", "Departamento salvo com sucesso.");
+		attr.addFlashAttribute("success", "Departamento cadastrado com sucesso.");
 		return "redirect:/departamentos/cadastrar";
 	}
 	
@@ -59,7 +59,7 @@ public class DepartamentoController {
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		if(service.departamentoTemCargos(id)) {  
-			attr.addFlashAttribute("fail", "Departamento não removido, pois exitem cargo(s) vinculados.");
+			attr.addFlashAttribute("fail", "Departamento não removido, pois exitem cargo(s) vinculado(s).");
 		} else {    				
 			service.excluir(id);  //se o departamento não conter cargos será excluído
 			attr.addFlashAttribute("success", "Departamento excluído com sucesso.");

@@ -12,7 +12,7 @@ import com.curso.boot.demomvc.model.Cargo;
 @Service
 @Transactional(readOnly = false)
 public class CargoServiceImpl implements CargoService {
-	
+
 	@Autowired
 	private CargoDAO dao;
 
@@ -31,16 +31,26 @@ public class CargoServiceImpl implements CargoService {
 		dao.delete(id);
 	}
 
-	@Override @Transactional(readOnly = true)
+	@Override
+	@Transactional(readOnly = true)
 	public Cargo buscarPorId(Long id) {
-		
+
 		return dao.findById(id);
 	}
 
-	@Override @Transactional(readOnly = true)
+	@Override
+	@Transactional(readOnly = true)
 	public List<Cargo> burcarTodos() {
-		
+
 		return dao.findAll();
+	}
+
+	@Override
+	public boolean cargoTemFuncionario(Long id) {
+		if (buscarPorId(id).getFuncionarios().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }

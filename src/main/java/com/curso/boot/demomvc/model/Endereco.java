@@ -25,7 +25,7 @@ public class Endereco extends AbstractEntity<Long>{
 	private UF uf;
 	
 	@Column(nullable = false, length = 9)
-	private String cpf;
+	private String cep;
 	
 	@Column(nullable = false, length = 5)
 	private Integer numero;
@@ -64,12 +64,12 @@ public class Endereco extends AbstractEntity<Long>{
 		this.uf = uf;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public Integer getNumero() {

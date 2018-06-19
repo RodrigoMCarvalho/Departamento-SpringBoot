@@ -11,5 +11,6 @@ public interface CargoService {
 	public void excluir(Long id);
 	public Cargo buscarPorId(Long id);
 	public List<Cargo> burcarTodos();
+	public boolean cargoTemFuncionario(Long id);
 	
 }
