@@ -8,7 +8,7 @@ import com.curso.boot.demomvc.model.Departamento;
 import com.curso.boot.demomvc.service.DepartamentoService;
 
 @Component
-public class DepartamentoConversor implements Converter<String, Departamento> {
+public class StringToDepartamentoConversor implements Converter<String, Departamento> {
 	
 	@Autowired
 	private DepartamentoService departamentoService;

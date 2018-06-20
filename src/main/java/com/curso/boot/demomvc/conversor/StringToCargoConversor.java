@@ -8,7 +8,7 @@ import com.curso.boot.demomvc.model.Cargo;
 import com.curso.boot.demomvc.service.CargoService;
 
 @Component
-public class CargoConversor implements Converter<String, Cargo>{
+public class StringToCargoConversor implements Converter<String, Cargo>{
 	
 	@Autowired
 	private CargoService service;

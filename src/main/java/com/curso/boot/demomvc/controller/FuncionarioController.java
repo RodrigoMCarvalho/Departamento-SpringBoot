@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import com.curso.boot.demomvc.model.Cargo;
 import com.curso.boot.demomvc.model.Funcionario;
 import com.curso.boot.demomvc.model.UF;
 import com.curso.boot.demomvc.service.CargoService;
 import com.curso.boot.demomvc.service.FuncionarioService;
+import com.curso.boot.demomvc.validator.FuncionarioValidator;
 
 @Controller
 @RequestMapping("/funcionarios")
@@ -34,6 +37,13 @@ public class FuncionarioController {
 	
 	@Autowired
 	private CargoService cargoService;
+	
+	//A anotação @InitBinder vai instruir o Spring a executar este método como o primeiro da classe
+	//Para finalizar o processo de Spring Validator, é preciso dizer ao controller que ele deve usar a classe 
+	@InitBinder		//que implementou a interface Validator como validador do formulário
+	public void InitBinder(WebDataBinder binder) {
+		binder.addValidators(new FuncionarioValidator());
+	}
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Funcionario funcionario) {
