@@ -32,7 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessHandler(logoutSuccessHandler); //para redirecionar após realizar logout no sistema;
+			.logoutSuccessHandler(logoutSuccessHandler) //para redirecionar após realizar logout no sistema;
+		.and()
+			.rememberMe().userDetailsService(userDetailsService);  //opção de lembrar login e senha
 	}
 	
 	@Override
