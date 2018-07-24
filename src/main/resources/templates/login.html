@@ -4,7 +4,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
 <head>
-	<title>Spring-Boot Básico</title>
+	<title>Departamento</title>
 	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -21,10 +21,6 @@
 			<div class="col-sm-4 col-sm-offset-4">
 				<div th:if="${param.error}">
 					<div class="alert alert-danger">Usuário e/ou inválidos!</div>
-				</div>
-
-				<div th:if="${param.logout}">
-					<div class="alert alert-info">Até logo!</div>
 				</div>
 
 				<div class="panel panel-info">

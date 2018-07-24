@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -15,6 +16,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private CustomLogoutSuccessHandler logoutSuccessHandler;
+	
+	@Autowired
+	private ImplementsUserDetailsService userDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -26,16 +30,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.formLogin().loginPage("/login").permitAll()
 		.and()
-			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessHandler(logoutSuccessHandler); //para redirecionar após realizar logout no sistema;
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("rodrigo").password("{noop}123").roles("ADMIN")
-			.and()
-			.withUser("gustavo").password("{noop}123").roles("USER");
+//		auth.inMemoryAuthentication()
+//			.withUser("rodrigo").password("{noop}123").roles("ADMIN")    // autenticação em memória
+//			.and()
+//			.withUser("gustavo").password("{noop}123").roles("USER");
+		auth.userDetailsService(userDetailsService)
+			.passwordEncoder(new BCryptPasswordEncoder());       //autenticação via JPA com criptografia
 	}
 	
 	@Override
