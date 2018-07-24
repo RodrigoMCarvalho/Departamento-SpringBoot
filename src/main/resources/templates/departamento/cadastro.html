@@ -14,6 +14,9 @@
 	                        <span>Cadastrar Departamentos</span>
 	                    </li>
 	                </ul>
+		        		
+		        		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					</form>
 	                <a class="btn btn-primary btn-md" href="/departamentos/listar" role="button">
 	                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
 	                    <span>Listar Departamentos</span>

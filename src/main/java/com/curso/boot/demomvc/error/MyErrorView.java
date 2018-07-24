@@ -26,6 +26,10 @@ public class MyErrorView implements ErrorViewResolver{
 			modelAndView.addObject("error", "Ocorreu um erro interno no servidor");
 			modelAndView.addObject("message", "Tente novamente mais tarde.");
 		}
+		if (status.value() == 403) {
+			modelAndView.addObject("error", "Você não tem permissão para acessar esse recurso.");
+			modelAndView.addObject("message", "Entre em contato com o Administrador.");
+		}
 		
 		return modelAndView;
 	}
